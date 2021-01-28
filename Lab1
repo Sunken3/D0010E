@@ -1,0 +1,118 @@
+public class LifeLength {
+	
+	// -----------UPPGIFT 1-----------
+		public static int f1(int a0){ 
+			if (a0 == 1) {
+				return 1;
+			}
+			if (a0 % 2 != 0) {
+				return (3*a0 + 1); 
+				
+			} else {
+				return (a0/2); 
+				
+			}
+		}
+		public static void task1(String [] args) {
+			int first = Integer.parseInt(args[0]);
+			System.out.println(">Java LifeLength " + first);
+			System.out.println(f1(first));
+			
+		}
+	//------------UPPGIFT 2-----------	
+		public static int f2(int a0) {
+			return f1(f1(a0)); 
+		
+		}
+		public static int f4(int a0) {
+			return f2(f2(a0)); 
+			
+		}
+		public static int f8(int a0) {
+			return f4(f4(a0)); 
+			
+		}
+			
+		public static int f16(int a0) {
+			return f8(f8(a0));
+		}
+		
+		public static int f32(int a0) {
+			return f16(f16(a0));
+		}
+		
+		public static void task2(int a0) {
+			System.out.println("f2 = " + f2(a0) + " f4 = " + f4(a0) + " f8 = "
+			      + f8(a0) + " f16 = " + f16(a0) + " f32 = "+f32(a0));
+			}
+		
+		
+	// --------- UPPGIFT 3----------	
+		public static int interateF(int a0, int n) {
+			int result = a0;
+			if (n >= 0) {
+				for (int i = 1; i <= n; i++) {
+					result = f1(result);
+					}
+			} else {
+				return -1;
+			}
+			return result;  
+		}
+		
+		public static void task3() {
+			System.out.println("Result for (42, 3) = " + interateF(42, 3)); 
+			System.out.println("Result for (3, 5) = " + interateF(3, 5));
+			System.out.println("Result for (1, 3) = " + interateF(1, 3)); 
+		}
+	// -------- UPPGIFT 4------------		
+		public static String iterLifeLength(int a0) {
+			
+			int y = 0;
+			int x = a0; 
+			
+			while(a0 != 1){
+				y++;
+				a0 = f1(a0);
+			}
+			return ("The life length of "+ x +" is "+ y);
+		}
+		
+		public static void task4(String[] args) {
+			int first = Integer.parseInt(args[0]); //--- prints a0 
+			System.out.println(iterLifeLength(first)); 
+		}
+		
+	//-------- UPPGIFT 6---------	
+		public static int recLifeLength(int a0) {
+			if (a0 == 1) {
+				return 0; 
+			} else {
+				return (recLifeLength(f1(a0))) + 1;
+			}
+		}
+		public static String intToStringTask6(int a0) {
+			return "[Iteration] " + iterLifeLength(a0) + "\t" + "[Recursive]" + "The life length of " + a0 + " is "
+					+ recLifeLength(a0);
+		}
+		
+		public static void task6() {
+			for(int i = 1; i < 16; i++) {
+				System.out.println(intToStringTask6(i));
+			}
+		}
+		public static void main(String[] args) {
+			
+			int n = 6; 
+			switch (n) {
+			
+			case 1: task1(args); break;
+			case 2: task2(42); break; //Instead of args... see task2()
+			case 3: task3(); break; 
+			case 4: task4(args); break;
+			case 6: task6(); break;
+			default: System.out.println("Invalid input.");
+			}
+		}
+			
+}
